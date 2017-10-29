@@ -1,0 +1,15 @@
+name = Open Atrium Work Tracker Reports
+description = A set of basic reports for Open Atrium Work Tracker
+core = 7.x
+version = "7.x-1.0"
+package = Open Atrium
+dependencies[] = oa_worktracker
+stylesheets[all][] = oa_worktracker.css
+apps[screenshots][] = app/screenshot.png
+apps[logo] = app/logo.png
+apps[author] = vacho
+apps[author_url] = https://www.drupal.org/u/vacho
+apps[server] = openatrium
+apps[package] = Built-in Apps
+
+
