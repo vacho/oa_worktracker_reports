@@ -19,13 +19,21 @@ function oa_worktracker_reports_menu() {
  */
 function tasks() {
   $path = Drupal_get_path('module', 'oa_worktracker_reports');
+  oa_angular_add(array('sanitize', 'cookies', 'ng-modules', 'ng-treecontrol'));
   Drupal_add_js($path . '/js/tasks.js');
   Drupal_add_css($path . '/css/tasks.css');
   drupal_add_library('system', 'ui.datepicker');
   drupal_add_library('chosen', 'drupal.chosen');
-
   return theme('tasks');
 }
+
+/**
+ * Implements hook_controller_api().
+ */
+function oa_worktracker_reports_controller_api() {
+  return '2.x';
+}
+
 
 /**
  * hook_theme()

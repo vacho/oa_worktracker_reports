@@ -1,4 +1,4 @@
-<div class="view view-tasks view-id-tasks view-display-id-page">
+<div class="view view-tasks view-id-tasks view-display-id-page" ng-app="App" ng-controller="TasksController">
     <div class="view-filters">
         <form action="/tasks" method="get" id="views-exposed-form-taks" accept-charset="UTF-8" role="form">
             <div>
@@ -194,18 +194,18 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="odd views-row-first views-row-last">
+                <tr class="odd views-row-first views-row-last" ng-repeat="task in arrayTasks">
                     <td class="views-field ">
-                        <a href="">CRED-1</a>
+                        <a href="">{{ task.codigo_hoja_ruta }}</a>
                     </td>
                     <td class="views-field ">
-                        <a href="/creditos/tareas-creditos/cr-dito-emma-perez-10000-bs">Crédito Emma Perez - 10.000 Bs</a>
+                        <a href="/creditos/tareas-creditos/cr-dito-emma-perez-10000-bs">{{ task.title }}</a>
                     </td>
                     <td class="views-field ">
                         Créditos
                     </td>
                     <td class="views-field ">
-                        Abierta
+                        {{ task.oa_worktracker_task_status }}
                     </td>
                     <td class="views-field ">
                         Baldivieso Saavedra Aldo
