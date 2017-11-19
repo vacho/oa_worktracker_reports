@@ -196,7 +196,7 @@
                 <tbody>
                 <tr class="odd views-row-first views-row-last" ng-repeat="task in arrayTasks">
                     <td class="views-field ">
-                        <a href="">{{ task.codigo_hoja_ruta }}</a>
+                        <a href="">{{ task.code }}</a>
                     </td>
                     <td class="views-field ">
                         <a href="/creditos/tareas-creditos/cr-dito-emma-perez-10000-bs">{{ task.title }}</a>

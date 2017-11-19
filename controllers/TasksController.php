@@ -19,7 +19,7 @@ class OaWorktrackerReportsTasksController {
     $datas  = EntitiesData::getDatas(
       'node',
       'oa_worktracker_task',
-      'codigo_hoja_ruta oa_worktracker_task_status',
+      'code oa_worktracker_task_status',
       ''
       );
 
