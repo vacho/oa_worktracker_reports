@@ -20,10 +20,9 @@ function oa_worktracker_reports_menu() {
 function tasks() {
   $path = Drupal_get_path('module', 'oa_worktracker_reports');
   Drupal_add_js($path . '/js/tasks.js');
+  Drupal_add_css($path . '/css/tasks.css');
   drupal_add_library('system', 'ui.datepicker');
-  //drupal_add_library('system', 'ui.chosen');
   drupal_add_library('chosen', 'drupal.chosen');
-  //drupal_add_js("(function ($) { $('.datepicker').datepicker(); })(jQuery);", array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
 
   return theme('tasks');
 }
