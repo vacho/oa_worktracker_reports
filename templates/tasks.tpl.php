@@ -196,25 +196,25 @@
                 <tbody>
                 <tr class="odd views-row-first views-row-last" ng-repeat="task in arrayTasks">
                     <td class="views-field ">
-                        <a href="">{{ task.code }}</a>
+                        <a href="">{{ task.field_code }}</a>
                     </td>
                     <td class="views-field ">
                         <a href="/creditos/tareas-creditos/cr-dito-emma-perez-10000-bs">{{ task.title }}</a>
                     </td>
                     <td class="views-field ">
-                        Créditos
+                        {{ task.oa_section_ref.title }}
                     </td>
                     <td class="views-field ">
-                        {{ task.oa_worktracker_task_status }}
+                        {{ task.field_oa_worktracker_priority }}
                     </td>
                     <td class="views-field ">
-                        Baldivieso Saavedra Aldo
+                        {{ task.field_oa_worktracker_task_status }}
                     </td>
                     <td class="views-field ">
-                        Nov 1 2017
+                        {{ task.created }}
                     </td>
                     <td class="views-field ">
-                        Nov 15 2017
+                        {{ task.field_oa_worktracker_duedate }}
                     </td>
                 </tr>
                 </tbody>

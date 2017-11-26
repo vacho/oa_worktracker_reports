@@ -16,20 +16,37 @@ class OaWorktrackerReportsTasksController {
    */
   function getTasks() {
 
-    $datas  = EntitiesData::getDatas(
+    $data  = EntitiesData::getDatas(
       'node',
       'oa_worktracker_task',
-      'code oa_worktracker_task_status',
+      'field_code field_oa_worktracker_task_status oa_section_ref(path) field_oa_worktracker_priority field_oa_worktracker_duedate',
       ''
       );
+    $priority = "";
 
-    /*$data = array(
-      'Hola bebe la gente dice que estas llorando',
-      'y te estas calentando',
-      'y no puede ser'
-    );*/
-    //return drupal_json_encode($datas);
-    return drupal_json_output($datas);
+    //dpm($data);
+    $i = 0;
+    foreach ($data AS $single_data) {
+      switch ($single_data['field_oa_worktracker_priority']) {
+        case '2':
+          $priority = 'Low';
+          break;
+        case '5':
+          $priority = 'Normal';
+          break;
+        case '8':
+          $priority = 'Hight';
+          break;
+      }
+      $data[$i]['field_oa_worktracker_priority'] = $priority;
+      $data[$i]['field_oa_worktracker_task_status'] = t($single_data['field_oa_worktracker_task_status']);
+      $data[$i]['created'] = format_date($single_data['created'], 'medium', '', NULL, 'es');
+      $duedate = strtotime($single_data['field_oa_worktracker_duedate']);
+      $data[$i]['field_oa_worktracker_duedate'] = format_date($duedate, 'medium', '', NULL, 'es');
+      $i++;
+    }
+
+    return drupal_json_output($data);
 
   }
 
