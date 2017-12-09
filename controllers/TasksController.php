@@ -16,6 +16,8 @@ class OaWorktrackerReportsTasksController {
    */
   function getTasks() {
 
+    dpm($_GET['sections']);
+
     $data  = EntitiesData::getDatas(
       'node',
       'oa_worktracker_task',

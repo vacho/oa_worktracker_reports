@@ -1,21 +1,71 @@
 jQuery(document).ready(function(){
-  //jQuery("#task-status").chosen();
   jQuery("#duedate, #startdate").datepicker(
-      { dateFormat: 'M d yy' }
+      { dateFormat: 'dd-mm-yy' }
   );
 });
 
 (function ($) {
-
   var app = angular.module('App',[]);
   app.controller('TasksController', ['$scope', '$http', function($scope, $http) {
 
     $http.get("/tasks-json").then(function (response) {
+      $scope.sections = new Array();
+      $scope.startdate = "";
+      $scope.duedate = "";
+      $scope.status = new Array();
+      $scope.priority = new Array();
+      $scope.code = "";
+      $scope.title = "";
+      $scope.assigned = "";
+
       $scope.tasks = response.data;
       $scope.arrayTasks = Object.keys($scope.tasks).map(function(key) {
         return $scope.tasks[key];
       });
     });
+
+    $scope.submit = function(){
+
+      var parameters = "";
+
+      var sections = $scope.sections;
+
+      var date = $scope.startdate.split("-");
+      var startdate_date = new Date(date[2], date[1] - 1, date[0]);
+      var startdate_timestamp = parseInt(startdate_date.getTime()/1000);
+
+      var date = $scope.duedate.split("-");
+      var duedate_date = new Date(date[2], date[1] - 1, date[0]);
+      var duedate_timestamp = parseInt(duedate_date.getTime()/1000)+60*60*11+60*59;
+
+      var status = $scope.status;
+      var priority = $scope.priority;
+
+      sections.forEach(function(element) {
+        parameters = parameters + "sections[]=" + element + "&";
+      });
+      parameters = parameters + "startdate=" + startdate_timestamp + "&";
+      parameters = parameters + "duedate=" + duedate_timestamp + "&";
+      status.forEach(function(element) {
+        parameters = parameters + "status[]=" + element + "&";
+      });
+      priority.forEach(function(element) {
+        parameters = parameters + "priority[]=" + element + "&";
+      });
+      parameters = parameters + "code=" + $scope.code + "&";
+      parameters = parameters + "title=" + $scope.title + "&";
+      parameters = parameters + "assigned=" + $scope.assigned;
+
+      console.log(parameters);
+
+      $http.get("/tasks-json?"+parameters).then(function(response) {
+        $scope.tasks = response.data;
+        $scope.arrayTasks = Object.keys($scope.tasks).map(function(key) {
+          return $scope.tasks[key];
+        });
+      });
+
+    };
 
   }]);
 

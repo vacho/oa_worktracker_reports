@@ -1,6 +1,6 @@
 <div class="view view-tasks view-id-tasks view-display-id-page" ng-app="App" ng-controller="TasksController">
     <div class="view-filters">
-        <form action="/tasks" method="get" id="views-exposed-form-taks" accept-charset="UTF-8" role="form">
+        <form id="views-exposed-form-taks" accept-charset="UTF-8" role="form" ng-submit="submit()">
             <div>
                 <div class="views-exposed-form ">
                     <div class="views-exposed-widgets clearfix">
@@ -11,11 +11,17 @@
                                 <div class="chosen-container chosen-container-multi form-control chosen-processed"
                                      style="width: 250px;" id="worktracker_section_value_chosen">
                                     <select multiple="multiple"
-                                            name="section[]"
+                                            name="sections[]"
                                             class="form-control form-select"
-                                            id="section"
-                                            size="5">
-                                        <option value="open">Créditos</option>
+                                            id="sections"
+                                            size="5"
+                                            ng-model="sections">
+                                        <option value="creditos">Créditos</option>
+                                        <option value="cooperativa">Cooperativa</option>
+                                        <option value="captaciones">Captaciones</option>
+                                        <option value="legal">Legal</option>
+                                        <option value="jefes-de-area">Jefes de Area</option>
+                                        <option value="asfi">ASFI</option>
                                     </select>
                                 </div>
                             </div>
@@ -38,7 +44,8 @@
                                                                name="startdate[value][date]"
                                                                value=""
                                                                size="12"
-                                                               maxlength="30">
+                                                               maxlength="30"
+                                                               ng-model="startdate">
                                                         <span class="help-block"> Por ejemplo, Oct 29 2017</span>
                                                     </div>
                                                 </div>
@@ -67,7 +74,8 @@
                                                                name="duedate[value][date]"
                                                                value=""
                                                                size="12"
-                                                               maxlength="30">
+                                                               maxlength="30"
+                                                               ng-model="duedate" >
                                                         <span class="help-block"> Por ejemplo, Oct 29 2017</span>
                                                     </div>
                                                 </div>
@@ -77,17 +85,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="worktracker-task-status-wrapper"
+                        <div id="worktracker-status-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-task-status"> Estado </label>
+                            <label for="worktracker-status"> Estado </label>
                                 <div class="form-item form-type-select">
                                     <div class="chosen-container chosen-container-multi form-control chosen-processed"
-                                         style="width: 240px;" id="worktracker_task_status_value_chosen">
+                                         style="width: 240px;" id="worktracker_status_value_chosen">
                                         <select multiple="multiple"
-                                                name="task_status[]"
+                                                name="status[]"
                                                 class="form-control form-select"
-                                                id="task-status"
-                                                size="4">
+                                                id="status"
+                                                size="4"
+                                                ng-model="status">
                                             <option value="open">Abierta</option>
                                             <option value="duplicate">Duplicada</option>
                                             <option value="deferred">Postergada</option>
@@ -96,20 +105,21 @@
                                     </div>
                                 </div>
                         </div>
-                        <div id="worktracker-prioriti-wrapper"
+                        <div id="worktracker-priority-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-prioriti"> Prioridad </label>
+                            <label for="worktracker-priority"> Prioridad </label>
                             <div class="form-item form-type-select">
                                 <div class="chosen-container chosen-container-multi form-control chosen-processed"
-                                     style="width: 230px;" id="worktracker_prioriti_value_chosen">
+                                     style="width: 230px;" id="worktracker_priority_value_chosen">
                                     <select multiple="multiple"
-                                            name="prioriti[]"
+                                            name="priority[]"
                                             class="form-control form-select"
-                                            id="prioriti"
-                                            size="5">
-                                        <option value="open">Alta</option>
-                                        <option value="duplicate">Normal</option>
-                                        <option value="deferred">Baja</option>
+                                            id="priority"
+                                            size="5"
+                                            ng-model="priority">
+                                        <option value="2">Baja</option>
+                                        <option value="5">Normal</option>
+                                        <option value="8">Alta</option>
                                     </select>
                                 </div>
                             </div>
@@ -123,7 +133,8 @@
                                            type="text"
                                            id="code"
                                            name="code"
-                                           value="" size="30" maxlength="128">
+                                           value="" size="30" maxlength="128"
+                                           ng-model="code">
                                 </div>
                             </div>
                         </div>
@@ -136,7 +147,8 @@
                                            type="text"
                                            id="title"
                                            name="title"
-                                           value="" size="30" maxlength="128">
+                                           value="" size="30" maxlength="128"
+                                           ng-model="title">
                                 </div>
                             </div>
                         </div>
@@ -149,7 +161,8 @@
                                            type="text"
                                            id="assigned"
                                            name="assigned"
-                                           value="" size="30" maxlength="128">
+                                           value="" size="30" maxlength="128"
+                                           ng-model="assigned">
                                 </div>
                             </div>
                         </div>
