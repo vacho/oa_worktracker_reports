@@ -56,8 +56,6 @@ jQuery(document).ready(function(){
       parameters = parameters + "title=" + $scope.title + "&";
       parameters = parameters + "assigned=" + $scope.assigned;
 
-      console.log(parameters);
-
       $http.get("/tasks-json?"+parameters).then(function(response) {
         $scope.tasks = response.data;
         $scope.arrayTasks = Object.keys($scope.tasks).map(function(key) {

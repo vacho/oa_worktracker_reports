@@ -16,17 +16,16 @@ class OaWorktrackerReportsTasksController {
    */
   function getTasks() {
 
-    dpm($_GET['sections']);
+    //dpm($_GET['sections']);
 
     $data  = EntitiesData::getDatas(
       'node',
       'oa_worktracker_task',
-      'field_code field_oa_worktracker_task_status oa_section_ref(path) field_oa_worktracker_priority field_oa_worktracker_duedate',
+      'field_code field_oa_worktracker_task_status oa_section_ref(node) field_oa_worktracker_priority field_oa_worktracker_duedate field_oa_worktracker_assigned_to(user,field_user_display_name)',
       ''
       );
     $priority = "";
 
-    //dpm($data);
     $i = 0;
     foreach ($data AS $single_data) {
       switch ($single_data['field_oa_worktracker_priority']) {
