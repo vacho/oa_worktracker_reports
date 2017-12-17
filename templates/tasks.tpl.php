@@ -4,24 +4,26 @@
             <div>
                 <div class="views-exposed-form ">
                     <div class="views-exposed-widgets clearfix">
-                        <div id="worktracker-task-section-wrapper"
+                        <div id="worktracker-task-space-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-section"> Sección </label>
+                            <label for="worktracker-space"> Espacio </label>
                             <div class="form-item form-type-select">
                                 <div class="chosen-container chosen-container-multi form-control chosen-processed"
-                                     style="width: 250px;" id="worktracker_section_value_chosen">
-                                    <select multiple="multiple"
-                                            name="sections[]"
+                                     style="width: 250px;" id="worktracker_space_value_chosen">
+                                    <!--<select multiple="multiple"
+                                            name="spaces[]"
                                             class="form-control form-select"
-                                            id="sections"
-                                            size="5"
-                                            ng-model="sections">
-                                        <option value="creditos">Créditos</option>
+                                            id="spaces">
                                         <option value="cooperativa">Cooperativa</option>
                                         <option value="captaciones">Captaciones</option>
                                         <option value="legal">Legal</option>
-                                        <option value="jefes-de-area">Jefes de Area</option>
-                                        <option value="asfi">ASFI</option>
+                                    </select>-->
+                                    <select ng-options="option.nid as option.title for option in arrayTasks[0].spaces"
+                                            ng-model="spaces"
+                                            class="form-control form-select"
+                                            name="spaces[]"
+                                            id="spaces"
+                                            >
                                     </select>
                                 </div>
                             </div>
@@ -91,16 +93,12 @@
                                 <div class="form-item form-type-select">
                                     <div class="chosen-container chosen-container-multi form-control chosen-processed"
                                          style="width: 240px;" id="worktracker_status_value_chosen">
-                                        <select multiple="multiple"
-                                                name="status[]"
+                                        <select ng-options="option.id as option.title for option in arrayTasks[0].status"
+                                                ng-model="status"
                                                 class="form-control form-select"
+                                                name="status[]"
                                                 id="status"
-                                                size="4"
-                                                ng-model="status">
-                                            <option value="open">Abierta</option>
-                                            <option value="duplicate">Duplicada</option>
-                                            <option value="deferred">Postergada</option>
-                                            <option value="closed">Cerrado</option>
+                                        >
                                         </select>
                                     </div>
                                 </div>
@@ -111,15 +109,12 @@
                             <div class="form-item form-type-select">
                                 <div class="chosen-container chosen-container-multi form-control chosen-processed"
                                      style="width: 230px;" id="worktracker_priority_value_chosen">
-                                    <select multiple="multiple"
-                                            name="priority[]"
+                                    <select ng-options="option.id as option.title for option in arrayTasks[0].priority"
+                                            ng-model="priority"
                                             class="form-control form-select"
+                                            name="priority[]"
                                             id="priority"
-                                            size="5"
-                                            ng-model="priority">
-                                        <option value="2">Baja</option>
-                                        <option value="5">Normal</option>
-                                        <option value="8">Alta</option>
+                                    >
                                     </select>
                                 </div>
                             </div>

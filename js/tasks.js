@@ -9,7 +9,7 @@ jQuery(document).ready(function(){
   app.controller('TasksController', ['$scope', '$http', function($scope, $http) {
 
     $http.get("/tasks-json").then(function (response) {
-      $scope.sections = new Array();
+      $scope.spaces = new Array();
       $scope.startdate = "";
       $scope.duedate = "";
       $scope.status = new Array();
@@ -22,13 +22,15 @@ jQuery(document).ready(function(){
       $scope.arrayTasks = Object.keys($scope.tasks).map(function(key) {
         return $scope.tasks[key];
       });
+
+      console.log($scope.arrayTasks);
     });
 
     $scope.submit = function(){
 
       var parameters = "";
 
-      var sections = $scope.sections;
+      var spaces = $scope.spaces;
 
       var date = $scope.startdate.split("-");
       var startdate_date = new Date(date[2], date[1] - 1, date[0]);
@@ -41,17 +43,21 @@ jQuery(document).ready(function(){
       var status = $scope.status;
       var priority = $scope.priority;
 
-      sections.forEach(function(element) {
-        parameters = parameters + "sections[]=" + element + "&";
+      
+      /*spaces.forEach(function(element) {
+        parameters = parameters + "spaces[]=" + element + "&";
       });
       parameters = parameters + "startdate=" + startdate_timestamp + "&";
       parameters = parameters + "duedate=" + duedate_timestamp + "&";
+
       status.forEach(function(element) {
         parameters = parameters + "status[]=" + element + "&";
       });
+
       priority.forEach(function(element) {
         parameters = parameters + "priority[]=" + element + "&";
-      });
+      });*/
+
       parameters = parameters + "code=" + $scope.code + "&";
       parameters = parameters + "title=" + $scope.title + "&";
       parameters = parameters + "assigned=" + $scope.assigned;
