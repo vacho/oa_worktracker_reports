@@ -53,6 +53,11 @@ class OaWorktrackerReportsTasksController {
       'title' => t('Closed')
     );
 
+    //dpm($_GET);
+
+    if(!empty($_GET['filtering'])){ // compose filter conditions
+
+    }
 
     $data = EntitiesData::getDatas(
       'node',

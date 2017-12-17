@@ -10,14 +10,6 @@
                             <div class="form-item form-type-select">
                                 <div class="chosen-container chosen-container-multi form-control chosen-processed"
                                      style="width: 250px;" id="worktracker_space_value_chosen">
-                                    <!--<select multiple="multiple"
-                                            name="spaces[]"
-                                            class="form-control form-select"
-                                            id="spaces">
-                                        <option value="cooperativa">Cooperativa</option>
-                                        <option value="captaciones">Captaciones</option>
-                                        <option value="legal">Legal</option>
-                                    </select>-->
                                     <select ng-options="option.nid as option.title for option in arrayTasks[0].spaces"
                                             ng-model="spaces"
                                             class="form-control form-select"

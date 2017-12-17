@@ -30,8 +30,6 @@ jQuery(document).ready(function(){
 
       var parameters = "";
 
-      var spaces = $scope.spaces;
-
       var date = $scope.startdate.split("-");
       var startdate_date = new Date(date[2], date[1] - 1, date[0]);
       var startdate_timestamp = parseInt(startdate_date.getTime()/1000);
@@ -40,27 +38,15 @@ jQuery(document).ready(function(){
       var duedate_date = new Date(date[2], date[1] - 1, date[0]);
       var duedate_timestamp = parseInt(duedate_date.getTime()/1000)+60*60*11+60*59;
 
-      var status = $scope.status;
-      var priority = $scope.priority;
-
-      
-      /*spaces.forEach(function(element) {
-        parameters = parameters + "spaces[]=" + element + "&";
-      });
-      parameters = parameters + "startdate=" + startdate_timestamp + "&";
-      parameters = parameters + "duedate=" + duedate_timestamp + "&";
-
-      status.forEach(function(element) {
-        parameters = parameters + "status[]=" + element + "&";
-      });
-
-      priority.forEach(function(element) {
-        parameters = parameters + "priority[]=" + element + "&";
-      });*/
-
       parameters = parameters + "code=" + $scope.code + "&";
       parameters = parameters + "title=" + $scope.title + "&";
+      parameters = parameters + "space=" + $scope.space + "&";
+      parameters = parameters + "status=" + $scope.status + "&";
+      parameters = parameters + "priority=" + $scope.priority + "&";
+      parameters = parameters + "startdate=" + startdate_timestamp + "&";
+      parameters = parameters + "duedate=" + duedate_timestamp + "&";
       parameters = parameters + "assigned=" + $scope.assigned;
+      parameters = parameters + "filtering=" + 'filtering';
 
       $http.get("/tasks-json?"+parameters).then(function(response) {
         $scope.tasks = response.data;
