@@ -202,7 +202,7 @@
                         <a href="/creditos/tareas-creditos/cr-dito-emma-perez-10000-bs">{{ task.title }}</a>
                     </td>
                     <td class="views-field ">
-                        {{ task.oa_section_ref.title }}
+                        {{ task.oa_section_ref[0].title }}
                     </td>
                     <td class="views-field ">
                         {{ task.field_oa_worktracker_priority }}

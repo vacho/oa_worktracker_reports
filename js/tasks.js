@@ -17,13 +17,9 @@ jQuery(document).ready(function(){
       $scope.code = "";
       $scope.title = "";
       $scope.assigned = "";
+      $scope.arrayTasks = angular.copy(response.data);
+      //console.log($scope.arrayTasks);
 
-      $scope.tasks = response.data;
-      $scope.arrayTasks = Object.keys($scope.tasks).map(function(key) {
-        return $scope.tasks[key];
-      });
-
-      console.log($scope.arrayTasks);
     });
 
     $scope.submit = function(){
@@ -45,14 +41,14 @@ jQuery(document).ready(function(){
       parameters = parameters + "priority=" + $scope.priority + "&";
       parameters = parameters + "startdate=" + startdate_timestamp + "&";
       parameters = parameters + "duedate=" + duedate_timestamp + "&";
-      parameters = parameters + "assigned=" + $scope.assigned;
+      parameters = parameters + "assigned=" + $scope.assigned + "&";
       parameters = parameters + "filtering=" + 'filtering';
 
+      console.log(parameters);
+
       $http.get("/tasks-json?"+parameters).then(function(response) {
-        $scope.tasks = response.data;
-        $scope.arrayTasks = Object.keys($scope.tasks).map(function(key) {
-          return $scope.tasks[key];
-        });
+        $scope.arrayTasks = angular.copy(response.data);
+        console.log($scope.arrayTasks);
       });
 
     };
