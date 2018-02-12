@@ -77,6 +77,33 @@ class OaWorktrackerReportsTasksController {
           'operator' => 'like'
         );
       }
+      if(!empty($_GET['status'])){
+        $conditions_to_send[] = array(
+          'type' => 'field_condition',
+          'field' => 'field_oa_worktracker_task_status',
+          'column' => 'value',
+          'value' => $_GET['status'],
+          'operator' => '='
+        );
+      }
+      if(!empty($_GET['priority'])){
+        $conditions_to_send[] = array(
+          'type' => 'field_condition',
+          'field' => 'field_oa_worktracker_priority',
+          'column' => 'value',
+          'value' => $_GET['priority'],
+          'operator' => '='
+        );
+      }
+      if( !empty($_GET['date_start']) && !empty($_GET['date_end']) ){
+        $conditions_to_send[] = array(
+          'type' => 'property_condition',
+          'field' => 'created',
+          'value_ini' => $_GET['date_start'],
+          'value_end' => $_GET['date_end'],
+          'operator' => 'BETWEEN'
+        );
+      }
     }
 
     $params = array(
@@ -89,7 +116,13 @@ class OaWorktrackerReportsTasksController {
           'field' => 'oa_section_ref',
           'entity_type' => 'node',
           'bundle' => 'oa_section',
-          'fields' => NULL,
+          'fields' => array(
+            array(
+              'field' => 'og_group_ref',
+              'entity_type' => 'node',
+              'bundle' => 'oa_space',
+            )
+          )
         ),
         'field_oa_worktracker_priority',
         'field_oa_worktracker_duedate',
@@ -107,28 +140,32 @@ class OaWorktrackerReportsTasksController {
     );
 
     $data = EntitiesData::getData($params);
-    $data[0]['priority'] = $priority;
-    $data[0]['spaces'] = $spaces;
-    $data[0]['status'] = $status;
     $i = 0;
 
     // Formating output
-    foreach ($data AS $single_data) {
-      foreach ($priority as $item) {
-        if($single_data['field_oa_worktracker_priority'] == $item['id']) {
-            $data[$i]['field_oa_worktracker_priority'] = $item['title'];
+    foreach ($data as $key => $value) {
+      if(!empty($_GET['space']) && $value['oa_section_ref'][0]['og_group_ref'][0]['nid'] !== $_GET['space']){
+        unset($data[$key]);
+      } else {
+        foreach ($priority as $item) {
+          if($value['field_oa_worktracker_priority'] == $item['id']) {
+              $data[$key]['field_oa_worktracker_priority'] = $item['title'];
+          }
         }
-      }
-      foreach ($status as $item) {
-        if($single_data['field_oa_worktracker_task_status'] == $item['id']) {
-            $data[$i]['field_oa_worktracker_task_status'] = $item['title'];
+        foreach ($status as $item) {
+          if($value['field_oa_worktracker_task_status'] == $item['id']) {
+              $data[$key]['field_oa_worktracker_task_status'] = $item['title'];
+          }
         }
+        $data[$key]['created_formated'] = format_date($value['created'], 'medium', '', NULL, 'es');
+        $duedate = strtotime($value['field_oa_worktracker_duedate']);
+        $data[$key]['duedate_formated'] = format_date($duedate, 'medium', '', NULL, 'es');
       }
-      $data[$i]['created'] = format_date($single_data['created'], 'medium', '', NULL, 'es');
-      $duedate = strtotime($single_data['field_oa_worktracker_duedate']);
-      $data[$i]['field_oa_worktracker_duedate'] = format_date($duedate, 'medium', '', NULL, 'es');
-      $i++;
     }
+
+    $data['priority'] = $priority;
+    $data['spaces'] = $spaces;
+    $data['status'] = $status;
 
     return drupal_json_output($data);
 

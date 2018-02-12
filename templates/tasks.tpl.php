@@ -10,36 +10,36 @@
                             <div class="form-item form-type-select">
                                 <div class="chosen-container chosen-container-multi form-control chosen-processed"
                                      style="width: 250px;" id="worktracker_space_value_chosen">
-                                    <select ng-options="option.nid as option.title for option in arrayTasks[0].spaces"
-                                            ng-model="spaces"
+                                    <select ng-options="option.nid as option.title for option in set_spaces"
+                                            ng-model="space"
                                             class="form-control form-select"
-                                            name="spaces[]"
-                                            id="spaces"
+                                            name="space[]"
+                                            id="space"
                                             >
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div id="worktracker-startdate-wrapper"
+                        <div id="worktracker-date-start-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-startdate"> Fecha inicio </label>
+                            <label for="worktracker-date-start"> Inicio Intervalo </label>
                             <div class="views-widget">
-                                <div id="worktracker-startdate">
-                                    <div id="worktracker-startdate-inside-wrapper">
+                                <div id="worktracker-date-start">
+                                    <div id="worktracker-date-start-inside-wrapper">
                                         <div class="container-inline-date">
                                             <div class="form-item form-type-date-popup form-group">
-                                                <div id="worktracker-startdate" class="date-padding">
+                                                <div id="worktracker-date-start" class="date-padding">
                                                     <div class="form-item form-type-textfield form-group">
                                                         <label class="element-invisible"
-                                                               for="worktracker-startdate">Fecha </label>
+                                                               for="worktracker-date-start">Fecha </label>
                                                         <input class="form-control form-text"
                                                                type="text"
-                                                               id="startdate"
-                                                               name="startdate[value][date]"
+                                                               id="date-start"
+                                                               name="date-start[value][date]"
                                                                value=""
                                                                size="12"
                                                                maxlength="30"
-                                                               ng-model="startdate">
+                                                               ng-model="date_start">
                                                         <span class="help-block"> Por ejemplo, Oct 29 2017</span>
                                                     </div>
                                                 </div>
@@ -49,27 +49,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="worktracker-duedate-wrapper"
+                        <div id="worktracker-date-end-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-duedate"> Fecha plazo </label>
+                            <label for="worktracker-date-end"> Fin Intervalo </label>
                             <div class="views-widget">
-                                <div id="worktracker-duedate">
-                                    <div id="worktracker-duedate-inside-wrapper">
+                                <div id="worktracker-date-end">
+                                    <div id="worktracker-date-end-inside-wrapper">
                                         <div class="container-inline-date">
                                             <div class="form-item form-type-date-popup form-group">
-                                                <div id="worktracker-duedate"
+                                                <div id="worktracker-date-end"
                                                      class="date-padding">
                                                     <div class="form-item form-type-textfield form-group">
                                                         <label class="element-invisible"
-                                                               for="worktracker-duedate">Fecha </label>
+                                                               for="worktracker-date-end">Fecha </label>
                                                         <input class="form-control form-text"
                                                                type="text"
-                                                               id="duedate"
-                                                               name="duedate[value][date]"
+                                                               id="date-end"
+                                                               name="date-end[value][date]"
                                                                value=""
                                                                size="12"
                                                                maxlength="30"
-                                                               ng-model="duedate" >
+                                                               ng-model="date_end" >
                                                         <span class="help-block"> Por ejemplo, Oct 29 2017</span>
                                                     </div>
                                                 </div>
@@ -85,7 +85,7 @@
                                 <div class="form-item form-type-select">
                                     <div class="chosen-container chosen-container-multi form-control chosen-processed"
                                          style="width: 240px;" id="worktracker_status_value_chosen">
-                                        <select ng-options="option.id as option.title for option in arrayTasks[0].status"
+                                        <select ng-options="option.id as option.title for option in set_status"
                                                 ng-model="status"
                                                 class="form-control form-select"
                                                 name="status[]"
@@ -101,7 +101,7 @@
                             <div class="form-item form-type-select">
                                 <div class="chosen-container chosen-container-multi form-control chosen-processed"
                                      style="width: 230px;" id="worktracker_priority_value_chosen">
-                                    <select ng-options="option.id as option.title for option in arrayTasks[0].priority"
+                                    <select ng-options="option.id as option.title for option in set_priorities"
                                             ng-model="priority"
                                             class="form-control form-select"
                                             name="priority[]"
@@ -188,7 +188,7 @@
                     <th class="views-field">
                         <a href="" title="ordenar por fecha inicio" class="active">Fecha inicio</a>
                     </th>
-                    <th class="views-field views-field-field-oa-worktracker-duedate">
+                    <th class="views-field views-field-field-oa-worktracker-date-end">
                         <a href="" title="ordenar por fecha límite" class="active">Fecha límite</a>
                     </th>
                 </tr>
@@ -211,10 +211,10 @@
                         {{ task.field_oa_worktracker_task_status }}
                     </td>
                     <td class="views-field ">
-                        {{ task.created }}
+                        {{ task.created_formated }}
                     </td>
                     <td class="views-field ">
-                        {{ task.field_oa_worktracker_duedate }}
+                        {{ task.duedate_formated }}
                     </td>
                 </tr>
                 </tbody>

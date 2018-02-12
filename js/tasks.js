@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-  jQuery("#duedate, #startdate").datepicker(
+  jQuery("#date-start, #date-end").datepicker(
       { dateFormat: 'dd-mm-yy' }
   );
 });
@@ -9,46 +9,84 @@ jQuery(document).ready(function(){
   app.controller('TasksController', ['$scope', '$http', function($scope, $http) {
 
     $http.get("/tasks-json").then(function (response) {
-      $scope.spaces = new Array();
-      $scope.startdate = "";
-      $scope.duedate = "";
-      $scope.status = new Array();
-      $scope.priority = new Array();
+      $scope.date_start = "";
+      $scope.date_end = "";
       $scope.code = "";
       $scope.title = "";
       $scope.assigned = "";
-      $scope.arrayTasks = angular.copy(response.data);
-      //console.log($scope.arrayTasks);
+
+      $scope.set_spaces = response.data.spaces;
+      $scope.space = "";
+      $scope.set_status = response.data.status;
+      $scope.status = "";
+      $scope.set_priorities = response.data.priority;
+      $scope.priority = "";
+
+      delete response.data.spaces;
+      delete response.data.priority;
+      delete response.data.status;
+      $scope.tasks = response.data;
+      $scope.arrayTasks = Object.keys($scope.tasks).map(function(key) {
+        return $scope.tasks[key];
+      });
 
     });
 
     $scope.submit = function(){
-
       var parameters = "";
-
-      var date = $scope.startdate.split("-");
-      var startdate_date = new Date(date[2], date[1] - 1, date[0]);
-      var startdate_timestamp = parseInt(startdate_date.getTime()/1000);
-
-      var date = $scope.duedate.split("-");
-      var duedate_date = new Date(date[2], date[1] - 1, date[0]);
-      var duedate_timestamp = parseInt(duedate_date.getTime()/1000)+60*60*11+60*59;
+      var date = $scope.date_start.split("-");
+      if(date.length > 1) {
+        var startdate = new Date(date[2], date[1] - 1, date[0]);
+        var date_start_timestamp = parseInt(startdate.getTime()/1000);
+      } else  {
+        var date_start_timestamp = "";
+      }
+      date = $scope.date_end.split("-");
+      if(date.length > 1) {
+        var enddate = new Date(date[2], date[1] - 1, date[0]);
+        var date_end_timestamp = parseInt(enddate.getTime()/1000)+60*60*23+60*59;
+      } else  {
+        var date_end_timestamp = "";
+      }
 
       parameters = parameters + "code=" + $scope.code + "&";
       parameters = parameters + "title=" + $scope.title + "&";
       parameters = parameters + "space=" + $scope.space + "&";
       parameters = parameters + "status=" + $scope.status + "&";
       parameters = parameters + "priority=" + $scope.priority + "&";
-      parameters = parameters + "startdate=" + startdate_timestamp + "&";
-      parameters = parameters + "duedate=" + duedate_timestamp + "&";
+      parameters = parameters + "date_start=" + date_start_timestamp + "&";
+      parameters = parameters + "date_end=" + date_end_timestamp + "&";
       parameters = parameters + "assigned=" + $scope.assigned + "&";
       parameters = parameters + "filtering=" + 'filtering';
 
-      console.log(parameters);
-
       $http.get("/tasks-json?"+parameters).then(function(response) {
-        $scope.arrayTasks = angular.copy(response.data);
-        console.log($scope.arrayTasks);
+        delete response.data.spaces;
+        delete response.data.priority;
+        delete response.data.status;
+
+        $scope.tasks = response.data;
+        $scope.arrayTasks = Object.keys($scope.tasks).map(function(key) {
+          return $scope.tasks[key];
+        });
+        // console.log($scope.arrayTasks);
+        // //$scope.arrayTasks = angular.copy(response.data);
+        // if($scope.space > 0) {
+        //   //console.log($scope.arrayTasks);
+        //
+        //   $scope.arrayTasks.forEach(function(item, index, element) {
+        //     //console.log(item.oa_section_ref[0].og_group_ref[0].nid);
+        //     //console.log(item.oa_section_ref[0].og_group_ref[0].nid + "==" + $scope.space);
+        //     if(item.oa_section_ref[0].og_group_ref[0].nid != $scope.space) {
+        //       console.log("Eliminar!!");
+        //     //   console.log("removiendo: " + item.oa_section_ref[0].og_group_ref[0].nid);
+        //       element.splice(index,1);
+        //     }
+        //   });
+        // }
+        //console.log(i);
+        //$scope.arrayTasks = array_return;
+        //$scope.arrayTasks.splice(0,1);
+        //console.log($scope.arrayTasks);
       });
 
     };
