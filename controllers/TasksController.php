@@ -126,6 +126,10 @@ class OaWorktrackerReportsTasksController {
         ),
         'field_oa_worktracker_priority',
         'field_oa_worktracker_duedate',
+        array(
+          'field' => 'field_oa_worktracker_assigned_to',
+          'entity_type' => 'user',
+        )
         /*array(
           'field' => 'field_oa_worktracker_assigned_to',
           'entity_type' => 'user',
@@ -140,13 +144,20 @@ class OaWorktrackerReportsTasksController {
     );
 
     $data = EntitiesData::getData($params);
-    $i = 0;
 
     // Formating output
+    $is_deleted = FALSE;
     foreach ($data as $key => $value) {
+      $is_deleted = FALSE;
+      if(!empty($_GET['assigned']) && $value['field_oa_worktracker_assigned_to'][0]['name'] !== $_GET['assigned']){
+        unset($data[$key]);
+        $is_deleted = TRUE;
+      }
       if(!empty($_GET['space']) && $value['oa_section_ref'][0]['og_group_ref'][0]['nid'] !== $_GET['space']){
         unset($data[$key]);
-      } else {
+        $is_deleted = TRUE;
+      }
+      if(!$is_deleted) {
         foreach ($priority as $item) {
           if($value['field_oa_worktracker_priority'] == $item['id']) {
               $data[$key]['field_oa_worktracker_priority'] = $item['title'];
