@@ -221,4 +221,15 @@
             </table>
         </div>
     </div>
+    <div>
+    <p>Total tareas: {{ arrayTasks[counter-1].total_tasks_filtered }}</p>
+    <p>
+      Abiertas: {{ arrayTasks[counter-1].total_open }} <br>
+      Duplicadas: {{ arrayTasks[counter-1].total_duplicate }} <br>
+      Postergadas: {{ arrayTasks[counter-1].total_deferred }} <br>
+      Cerradas: {{ arrayTasks[counter-1].total_closed }} <br>
+      Resueltas: {{ arrayTasks[counter-1].total_resolved }} <br>
+    </p>
+    <p>Tareas retrasadas: {{ arrayTasks[counter-1].total_delayed }}</p>
+    </div>
 </div>

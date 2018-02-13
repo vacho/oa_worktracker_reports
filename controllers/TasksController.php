@@ -54,6 +54,10 @@ class OaWorktrackerReportsTasksController {
       'id' => 'closed',
       'title' => t('Closed')
     );
+    $status[] = array(
+      'id' => 'resolved',
+      'title' => t('Resolved')
+    );
 
     if(!empty($_GET['filtering'])) { // compose filter conditions
       if(!empty($_GET['title'])) {
@@ -130,15 +134,6 @@ class OaWorktrackerReportsTasksController {
           'field' => 'field_oa_worktracker_assigned_to',
           'entity_type' => 'user',
         )
-        /*array(
-          'field' => 'field_oa_worktracker_assigned_to',
-          'entity_type' => 'user',
-          'bundle' => NULL,
-          'fields' => array(
-            'field_user_display_name',
-          )
-
-        )*/
       ),
       'conditions' => $conditions_to_send
     );
@@ -147,6 +142,10 @@ class OaWorktrackerReportsTasksController {
 
     // Formating output
     $is_deleted = FALSE;
+    $total_filtered = 0;
+    $total_open = 0; $total_duplicate = 0; $total_deferred = 0; $total_closed = 0; $total_resolved = 0;
+    $total_delayed = 0;
+
     foreach ($data as $key => $value) {
       $is_deleted = FALSE;
       if(!empty($_GET['assigned']) && $value['field_oa_worktracker_assigned_to'][0]['name'] !== $_GET['assigned']){
@@ -171,12 +170,42 @@ class OaWorktrackerReportsTasksController {
         $data[$key]['created_formated'] = format_date($value['created'], 'medium', '', NULL, 'es');
         $duedate = strtotime($value['field_oa_worktracker_duedate']);
         $data[$key]['duedate_formated'] = format_date($duedate, 'medium', '', NULL, 'es');
+
+        if($value['field_oa_worktracker_task_status'] == 'open'){
+          $total_open++;
+        }
+        if($value['field_oa_worktracker_task_status'] == 'duplicate'){
+          $total_duplicate++;
+        }
+        if($value['field_oa_worktracker_task_status'] == 'deferred'){
+          $total_deferred++;
+        }
+        if($value['field_oa_worktracker_task_status'] == 'closed'){
+          $total_closed++;
+        }
+        if($value['field_oa_worktracker_task_status'] == 'resolved'){
+          $total_resolved++;
+        }
+        if($duedate < time() && $value['field_oa_worktracker_task_status'] != 'resolved' ){
+          $total_delayed++;
+        }
+
+        $total_filtered++;
       }
     }
 
     $data['priority'] = $priority;
     $data['spaces'] = $spaces;
     $data['status'] = $status;
+    $data['statistics'] = array(
+      'total_tasks_filtered' => $total_filtered,
+      'total_open' => $total_open,
+      'total_duplicated' => $total_duplicate,
+      'total_deferred' => $total_deferred,
+      'total_closed' => $total_closed,
+      'total_resolved' => $total_resolved,
+      'total_delayed' => $total_delayed
+    );
 
     return drupal_json_output($data);
 

@@ -14,6 +14,7 @@ jQuery(document).ready(function(){
       $scope.code = "";
       $scope.title = "";
       $scope.assigned = "";
+      $scope.counter = 0;
 
       $scope.set_spaces = response.data.spaces;
       $scope.space = "";
@@ -29,6 +30,7 @@ jQuery(document).ready(function(){
       $scope.arrayTasks = Object.keys($scope.tasks).map(function(key) {
         return $scope.tasks[key];
       });
+      $scope.counter = $scope.arrayTasks.length;
 
     });
 
@@ -68,25 +70,7 @@ jQuery(document).ready(function(){
         $scope.arrayTasks = Object.keys($scope.tasks).map(function(key) {
           return $scope.tasks[key];
         });
-        // console.log($scope.arrayTasks);
-        // //$scope.arrayTasks = angular.copy(response.data);
-        // if($scope.space > 0) {
-        //   //console.log($scope.arrayTasks);
-        //
-        //   $scope.arrayTasks.forEach(function(item, index, element) {
-        //     //console.log(item.oa_section_ref[0].og_group_ref[0].nid);
-        //     //console.log(item.oa_section_ref[0].og_group_ref[0].nid + "==" + $scope.space);
-        //     if(item.oa_section_ref[0].og_group_ref[0].nid != $scope.space) {
-        //       console.log("Eliminar!!");
-        //     //   console.log("removiendo: " + item.oa_section_ref[0].og_group_ref[0].nid);
-        //       element.splice(index,1);
-        //     }
-        //   });
-        // }
-        //console.log(i);
-        //$scope.arrayTasks = array_return;
-        //$scope.arrayTasks.splice(0,1);
-        //console.log($scope.arrayTasks);
+        $scope.counter = $scope.arrayTasks.length;
       });
 
     };
