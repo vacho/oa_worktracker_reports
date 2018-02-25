@@ -11,6 +11,13 @@ function oa_worktracker_reports_menu() {
       'access content',
     ],
   ];
+  $items['task_detail'] = [
+    'title' => 'Detalle de la tarea',
+    'page callback' => 'task_detail',
+    'access arguments' => [
+      'access content',
+    ],
+  ];
   return $items;
 }
 
@@ -28,6 +35,19 @@ function tasks() {
 }
 
 /**
+ * Task detail callback
+ */
+function task_detail() {
+  $path = Drupal_get_path('module', 'oa_worktracker_reports');
+  oa_angular_add(array('sanitize', 'cookies', 'ng-modules', 'ng-treecontrol'));
+  Drupal_add_js($path . '/js/task_detail.js');
+  Drupal_add_css($path . '/css/task_detail.css');
+  drupal_add_library('system', 'ui.datepicker');
+  drupal_add_library('chosen', 'drupal.chosen');
+  return theme('task_detail');
+}
+
+/**
  * Implements hook_controller_api().
  */
 function oa_worktracker_reports_controller_api() {
@@ -42,6 +62,9 @@ function oa_worktracker_reports_theme() {
   return [
     'tasks' => [
       'template' => 'tasks',
+    ],
+    'task_detail' => [
+      'template' => 'task_detail',
     ],
   ];
 }
