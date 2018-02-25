@@ -6,7 +6,7 @@
                     <div class="views-exposed-widgets clearfix">
                         <div id="worktracker-task-space-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-space"> Espacio </label>
+                            <label for="worktracker-space"><?php print t('Space') ?></label>
                             <div class="form-item form-type-select">
                                 <div class="chosen-container chosen-container-multi form-control chosen-processed"
                                      style="width: 250px;" id="worktracker_space_value_chosen">
@@ -22,7 +22,7 @@
                         </div>
                         <div id="worktracker-date-start-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-date-start"> Inicio Intervalo </label>
+                            <label for="worktracker-date-start"><?php print t('Interval start') ?></label>
                             <div class="views-widget">
                                 <div id="worktracker-date-start">
                                     <div id="worktracker-date-start-inside-wrapper">
@@ -31,7 +31,7 @@
                                                 <div id="worktracker-date-start" class="date-padding">
                                                     <div class="form-item form-type-textfield form-group">
                                                         <label class="element-invisible"
-                                                               for="worktracker-date-start">Fecha </label>
+                                                               for="worktracker-date-start"><?php print t('Date') ?> </label>
                                                         <input class="form-control form-text"
                                                                type="text"
                                                                id="date-start"
@@ -40,7 +40,7 @@
                                                                size="12"
                                                                maxlength="30"
                                                                ng-model="date_start">
-                                                        <span class="help-block"> Por ejemplo, Oct 29 2017</span>
+                                                        <span class="help-block"> <?php print t('Such as') ?> Oct 29 2018</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -51,7 +51,7 @@
                         </div>
                         <div id="worktracker-date-end-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-date-end"> Fin Intervalo </label>
+                            <label for="worktracker-date-end"><?php print t('Interval end') ?></label>
                             <div class="views-widget">
                                 <div id="worktracker-date-end">
                                     <div id="worktracker-date-end-inside-wrapper">
@@ -61,7 +61,7 @@
                                                      class="date-padding">
                                                     <div class="form-item form-type-textfield form-group">
                                                         <label class="element-invisible"
-                                                               for="worktracker-date-end">Fecha </label>
+                                                               for="worktracker-date-end"><?php print t('Date') ?></label>
                                                         <input class="form-control form-text"
                                                                type="text"
                                                                id="date-end"
@@ -70,7 +70,7 @@
                                                                size="12"
                                                                maxlength="30"
                                                                ng-model="date_end" >
-                                                        <span class="help-block"> Por ejemplo, Oct 29 2017</span>
+                                                        <span class="help-block"><?php print t('Such as') ?> Oct 29 2018</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +81,7 @@
                         </div>
                         <div id="worktracker-status-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-status"> Estado </label>
+                            <label for="worktracker-status"><?php print t('State') ?></label>
                                 <div class="form-item form-type-select">
                                     <div class="chosen-container chosen-container-multi form-control chosen-processed"
                                          style="width: 240px;" id="worktracker_status_value_chosen">
@@ -97,7 +97,7 @@
                         </div>
                         <div id="worktracker-priority-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-priority"> Prioridad </label>
+                            <label for="worktracker-priority"><?php print t('Priority') ?></label>
                             <div class="form-item form-type-select">
                                 <div class="chosen-container chosen-container-multi form-control chosen-processed"
                                      style="width: 230px;" id="worktracker_priority_value_chosen">
@@ -113,7 +113,7 @@
                         </div>
                         <div id="worktracker-code-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-code"> Código hoja ruta </label>
+                            <label for="worktracker-code"><?php print t('Code') ?></label>
                             <div class="views-widget">
                                 <div class="form-item form-type-textfield form-group">
                                     <input class="form-control form-text"
@@ -127,7 +127,7 @@
                         </div>
                         <div id="worktracker-title-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-title"> Título </label>
+                            <label for="worktracker-title"><?php print t('Title') ?></label>
                             <div class="views-widget">
                                 <div class="form-item form-type-textfield form-group">
                                     <input class="form-control form-text"
@@ -141,7 +141,7 @@
                         </div>
                         <div id="worktracker-assigned-wrapper"
                              class="views-exposed-widget">
-                            <label for="worktracker-assigned"> Asignado </label>
+                            <label for="worktracker-assigned"><?php print t('Assigned') ?></label>
                             <div class="views-widget">
                                 <div class="form-item form-type-textfield form-group">
                                     <input class="form-control form-text"
@@ -155,7 +155,7 @@
                         </div>
                         <div class="views-exposed-widget views-submit-button">
                             <input type="submit" id="edit-submit-tareas" name=""
-                                   value="Aplicar"
+                                   value="<?php print t('Apply') ?>"
                                    class="form-submit btn btn-default btn-primary">
                         </div>
                     </div>
@@ -166,30 +166,30 @@
 
     <div class="view-content">
         <div class="table-responsive">
-            <h2 class="pane-title"> Tareas </h2>
+            <h2 class="pane-title"><?php print t('Tasks') ?></h2>
             <table class="views-table cols-7 table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th class="views-field">
-                        <a href="" title="ordenar por código" class="active">Código</a>
+                        <a href="" title="ordenar por código" class="active"><?php print t('Code') ?></a>
                     </th>
                     <th class="views-field">
-                        <a href="" title="ordenar por título" class="active">Título</a>
+                        <a href="" title="ordenar por título" class="active"><?php print t('Title') ?></a>
                     </th>
                     <th class="views-field">
-                        <a href="" title="ordenar por sección" class="active">Sección</a>
+                        <a href="" title="ordenar por sección" class="active"><?php print t('Section') ?></a>
                     </th>
                     <th class="views-field">
-                        <a href="" title="ordenar por prioridad" class="active">Prioridad</a>
+                        <a href="" title="ordenar por prioridad" class="active"><?php print t('Priority') ?></a>
                     </th>
                     <th class="views-field">
-                        <a href="" title="ordenar por estado" class="active">Estado</a>
+                        <a href="" title="ordenar por estado" class="active"><?php print t('State') ?></a>
                     </th>
                     <th class="views-field">
-                        <a href="" title="ordenar por fecha inicio" class="active">Fecha inicio</a>
+                        <a href="" title="ordenar por fecha inicio" class="active"><?php print t('Date start') ?></a>
                     </th>
                     <th class="views-field views-field-field-oa-worktracker-date-end">
-                        <a href="" title="ordenar por fecha límite" class="active">Fecha límite</a>
+                        <a href="" title="ordenar por fecha límite" class="active"><?php print t('Deadline') ?></a>
                     </th>
                 </tr>
                 </thead>
@@ -222,14 +222,14 @@
         </div>
     </div>
     <div>
-    <p>Total tareas: {{ arrayTasks[counter-1].total_tasks_filtered }}</p>
+    <p><?php print t('Total tasks') ?>: {{ arrayTasks[counter-1].total_tasks_filtered }}</p>
     <p>
-      Abiertas: {{ arrayTasks[counter-1].total_open }} <br>
-      Duplicadas: {{ arrayTasks[counter-1].total_duplicate }} <br>
-      Postergadas: {{ arrayTasks[counter-1].total_deferred }} <br>
-      Cerradas: {{ arrayTasks[counter-1].total_closed }} <br>
-      Resueltas: {{ arrayTasks[counter-1].total_resolved }} <br>
+      <?php print t('Open') ?>: {{ arrayTasks[counter-1].total_open }} <br>
+      <?php print t('Duplicate') ?>: {{ arrayTasks[counter-1].total_duplicate }} <br>
+      <?php print t('Deferred') ?>: {{ arrayTasks[counter-1].total_deferred }} <br>
+      <?php print t('Closed') ?>: {{ arrayTasks[counter-1].total_closed }} <br>
+      <?php print t('Resolved') ?>: {{ arrayTasks[counter-1].total_resolved }} <br>
     </p>
-    <p>Tareas retrasadas: {{ arrayTasks[counter-1].total_delayed }}</p>
+    <p><?php print t('Delayed tasks') ?>: {{ arrayTasks[counter-1].total_delayed }}</p>
     </div>
 </div>

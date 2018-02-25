@@ -5,14 +5,14 @@
  */
 function oa_worktracker_reports_menu() {
   $items['tasks'] = [
-    'title' => 'Lista de tareas',
+    'title' => t('Tasks list'),
     'page callback' => 'tasks',
     'access arguments' => [
       'access content',
     ],
   ];
   $items['task_detail'] = [
-    'title' => 'Detalle de la tarea',
+    'title' => t('Task detail'),
     'page callback' => 'task_detail',
     'access arguments' => [
       'access content',
