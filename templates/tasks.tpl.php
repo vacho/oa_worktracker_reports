@@ -196,10 +196,10 @@
                 <tbody>
                 <tr class="odd views-row-first views-row-last" ng-repeat="task in arrayTasks">
                     <td class="views-field ">
-                        <a href="">{{ task.field_code }}</a>
+                        <a href="/task-detail?code={{ task.field_code }}">{{ task.field_code }}</a>
                     </td>
                     <td class="views-field ">
-                        <a href="/creditos/tareas-creditos/cr-dito-emma-perez-10000-bs">{{ task.title }}</a>
+                        <a href="/task-detail?code={{ task.field_code }}">{{ task.title }}</a>
                     </td>
                     <td class="views-field ">
                         {{ task.oa_section_ref[0].title }}

@@ -11,7 +11,7 @@ function oa_worktracker_reports_menu() {
       'access content',
     ],
   ];
-  $items['task_detail'] = [
+  $items['task-detail'] = [
     'title' => t('Task detail'),
     'page callback' => 'task_detail',
     'access arguments' => [
